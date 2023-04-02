@@ -25,19 +25,19 @@ app.get('/', (req, res) => {
     res.render('index', { items: items });
 });
 
-// アイテムの追加
-app.post('/', (req, res) => {
-    // リクエストボディからアイテムを取得する
+// API endpoint to add items
+app.post('/api/items', (req, res) => {
+    // Get the item from the request body
     const item = req.body.item;
 
-    // アイテムのidを決定する
+    // Determine the item's id
     const id = items.length + 1;
 
-    // アイテムを追加する
+    // Add the item
     items.push({ id: id, title: item });
 
-    // トップページにリダイレクトする
-    res.redirect('/');
+    // Return the new item as JSON
+    res.json({ id: id, title: item });
 });
 
 // サーバーの起動
